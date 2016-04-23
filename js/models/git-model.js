@@ -7,6 +7,12 @@ var Issue_model = Backbone.Model.extend({
 	},
 });
 
+var refModel = Backbone.Model.extend({
+	defaults:{
+		text:'next'
+	},
+});
+
 var Repo_Model = Backbone.Collection.extend({
 	model : Issue_model,
 	initialize : function( arg) {
