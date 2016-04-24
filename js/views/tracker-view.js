@@ -38,12 +38,17 @@ var LocaleEv = Backbone.View.extend({
 	initialize : function () {
 		this.page_count=1;
 		this.issue_count=1;
+		this.value="";
 	},
 	events : {
 		'click #querybtn' : 'loadissues',
 		'click #next' : 'loadnextpage' ,
 		'click #previous' : 'loadprevpage',
-		'change #repouser' : 'reinitvars'
+		'change #repouser' : 'reinitvars',
+		'change #op' : 'loadopen',
+		'change #op24' : 'loadopen',
+		'change #op7' : 'loadopen',
+		'change #opg7' : 'loadopen'
 	},
 
 	reinitvars : function(e) {
@@ -53,10 +58,12 @@ var LocaleEv = Backbone.View.extend({
 	
 	
 	loadissues : function(e) {
+		this.initialize();
 		e.preventDefault();
 		this.removeChild();
 		var v = 1;
-		var str = this.loadurl(v);
+		this.value="";
+		var str = this.loadfilterurl("",v);
 		var data = new Repo_Model(str);
 		var app = new Repo_view( data,this );
 	},
@@ -65,7 +72,7 @@ var LocaleEv = Backbone.View.extend({
 	loadnextpage: function(e) {
 		this.removeChild();
 		this.page_count++;
-		var str = this.loadurl(this.page_count);
+		var str = this.loadfilterurl(this.value,this.page_count);
 		var data = new Repo_Model(str);
 		var app = new Repo_view( data,this );
 	},
@@ -83,17 +90,54 @@ var LocaleEv = Backbone.View.extend({
 		this.issue_count++;
 		
 		console.log(this.issue_count);
-		var str = this.loadurl(this.page_count);
+		var str = this.loadfilterurl(this.value,this.page_count);
+		var data = new Repo_Model(str);
+		var app = new Repo_view( data,this );
+	},
+	
+	loadopen: function (e) {
+		this.initialize();
+		e.preventDefault();
+		this.removeChild();
+		this.value = e.target.value;
+		var str = this.loadfilterurl(e.target.value,this.page_count);
 		var data = new Repo_Model(str);
 		var app = new Repo_view( data,this );
 	},
 	
 	
-	loadurl:function(v) {
+	loadfilterurl:function(value,v) {
 		var str = 'https://api.github.com/repos/';
 		str = str + document.getElementById('repouser').value+'/';
 		str = str + document.getElementById('reponame').value+'/';
-		str = str + 'issues?per_page='
+		str = str + 'issues?';
+		var date = new Date();
+		switch (value) {
+		case 'open':
+				str  = str + '&state=open';
+			break;
+		case '24hrs':
+				str  = str + '&state=open';
+				date.setDate(date.getDate()-1);
+				str  = str + '&since=' + date.toISOString();
+			break;
+		case 'week':
+				str  = str + '&state=open';
+				date.setDate(date.getDate()-7);
+				str  = str + '&since=' + date.toISOString();
+			break;
+		case 'opg7':
+				str  = str + '&state=open';
+				date.setMonth(0);
+				date.setDate(1);
+				date.setFullYear(date.getFullYear()-1)
+				console.log(date.toISOString());
+				str  = str + '&since=' + date.toISOString();
+			break;
+		default:
+			break;
+		}
+		str = str + '&per_page='
 		str = str + document.getElementById('issues').value;
 		str = str + '&page=' + v;
 		return str;
@@ -104,7 +148,7 @@ var LocaleEv = Backbone.View.extend({
 		while( el.hasChildNodes() ){
 		    el.removeChild(el.lastChild);
 		}
-	}
+	},
 });
 
 
@@ -134,7 +178,6 @@ var Repo_view = Backbone.View.extend({
 				this.removeChildEl();
 				$('#nextb').append(refv.render().$el);
 			}
-			console.log(this.gev.page_count>1);
 			if(this.gev.page_count>1) {
 				console.log("add prev button")
 				var refv = new previousView({

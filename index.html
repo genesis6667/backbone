@@ -13,32 +13,38 @@
 		    border-collapse: collapse;
 		    width: 100%;
 		}
+		
+		h1 {
+			background-color: black;
+			color: white;
+		}
 	</style>
     
     <title>Git Hub Issue Tracker</title>
 </head>
 <body>
-	<h1 style="text-align:center;margin-top:20px">Git Hub Issue Tracker</h1>
+	<h1 style="text-align:center;">Git Hub Issue Tracker</h1>
 	<br/><br/><br/>
 	 <div id="locale" style="text-align: center;">
-		<!--<input type="text" id="repourl" value="https://api.github.com/repos/vmg/redcarpet/issues" size="50"/><br/><br/> -->
+		<div>
+		<!--<input type="text" id="repourl" value="https://api.github.com/repos/vmg/redcarpet/issues?state=open&since=2016-04-13T00:11:20Z" size="50"/><br/><br/> -->
 		<div id="left" style="float:left;margin-left:400px;margin-top:-40px">
 			<div style=""><span>Repository User : </span><input type="text" id="repouser" size="20px" value="archlinuxcn"/></div><br/>
 			<div style=""><span>Repository Name : </span><input type="text" id="reponame" size="20px" value="repo"/></div><br/>
-			<div style="margin-left:-140px"><span>Number of Issues :&nbsp;&nbsp;&nbsp;&nbsp;All</span><input type="hidden" id="issues" size="20px" value="10"/></div>
+			<div style="margin-left:-140px"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="hidden" id="issues" size="20px" value="10"/></div>
 		</div>
 		<div id="right" style="float:right;margin-right:400px;margin-top:-50px">
-			<input type="radio" name="issuef" value="open" style="margin:10px"> Open-Issues<br/>
-  			<input type="radio" name="issuef" value="24hrs" style="margin:10px;margin-left:42px"> Opened in 24 hrs<br/>
-  			<input type="radio" name="issuef" value="week" style="margin:10px;margin-left:66px"> Opened in this week<br/>
-  			<input type="radio" name="issuef" value="" style="margin:10px;margin-left:102px"> Opened before this week<br/>
+			<input type="radio" name="issuef" id="op" value="open" style="margin:10px;margin-left:-55px"> Open-Issues<br/>
+  			<input type="radio" name="issuef" id ="op24" value="24hrs" style="margin:10px;margin-left:42px"> Opened/updated in 24 hrs<br/>
+  			<input type="radio" name="issuef" id="op7" value="week" style="margin:10px;margin-left:66px"> Opened/updated in this week<br/>
+  			<input type="radio" name="issuef" id="opg7" value="opg7" style="margin:10px;margin-left:65px"> Opened/updated in This Year<br/>
 		</div>
 		<button type="button" id="querybtn" style="margin-top:20px;margin-right:500px;">Query</button>
 		<br/><br/><br/>
-		
+		</div>
 		<div style="width:800px; margin:0 auto;">
     	<table>
-    		<thead style="font-weight:bold;background:Gainsboro">
+    		<thead style="font-weight:bold;background:black;color:white;">
     			<tr style="height:40px">
     				<td style="width:70px">ID</td>
     				<td style="width:1000px">Title</td>
@@ -73,15 +79,10 @@
 	
 	
 	<script type="text/javascript" src ="data.json"></script>
-	<script type="text/javascript" src="js/routers/router.js"></script>
 	<script type="text/javascript" src="js/models/git-model.js"></script>
 	<script type="text/javascript" src="js/views/tracker-view.js"></script>
+	<script type="text/javascript" src="js/routers/router.js"></script>
 	
-	<script type="text/javascript">
-		var lec = new LocaleEv();
-		var str = lec.loadurl();
-		Backbone.history.start();
-	</script>
 		<div id="nextb" style="text-align:center;margin-bottom:20px"></div>
 	</div>
 </body>
