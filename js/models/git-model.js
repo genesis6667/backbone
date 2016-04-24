@@ -7,9 +7,15 @@ var Issue_model = Backbone.Model.extend({
 	},
 });
 
-var refModel = Backbone.Model.extend({
+var nextModel = Backbone.Model.extend({
 	defaults:{
 		text:'next'
+	},
+});
+
+var previousModel = Backbone.Model.extend({
+	defaults:{
+		text:'previous'
 	},
 });
 

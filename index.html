@@ -23,8 +23,8 @@
 	 <div id="locale" style="text-align: center;">
 		<!--<input type="text" id="repourl" value="https://api.github.com/repos/vmg/redcarpet/issues" size="50"/><br/><br/> -->
 		<div id="left" style="float:left;margin-left:400px;margin-top:-40px">
-			<div style=""><span>Repository User : </span><input type="text" id="repouser" size="20px" value="ractivejs"/></div><br/>
-			<div style=""><span>Repository Name : </span><input type="text" id="reponame" size="20px" value="ractive"/></div><br/>
+			<div style=""><span>Repository User : </span><input type="text" id="repouser" size="20px" value="archlinuxcn"/></div><br/>
+			<div style=""><span>Repository Name : </span><input type="text" id="reponame" size="20px" value="repo"/></div><br/>
 			<div style="margin-left:-140px"><span>Number of Issues :&nbsp;&nbsp;&nbsp;&nbsp;All</span><input type="hidden" id="issues" size="20px" value="10"/></div>
 		</div>
 		<div id="right" style="float:right;margin-right:400px;margin-top:-50px">
@@ -60,8 +60,11 @@
 		<td><span id="html_url" style="margin:10px"><a href="<%= html_url %>"><%= html_url %></a></span></td>
 	</script>
 	
-	<script type="text/template" id="buttontemp">
+	<script type="text/template" id="nextbuttontemp">
 		<button id="next"><%= text %></button>
+	</script>
+	<script type="text/template" id="prevbuttontemp">
+		<button id="previous"><%= text %></button>
 	</script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js" type="text/javascript"></script>
