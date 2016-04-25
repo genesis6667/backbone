@@ -9,7 +9,7 @@ http.createServer( function (request, response) {
    var pathname = url.parse(request.url).pathname;
    
    if(request.url=='/index.html' || request.url=='/') {
-	    request.url = '/index.html';
+	    pathname = '/index.html';
 	    };
    // Print the name of the file for which request is made.
    console.log("Request for " + pathname + " received.");
