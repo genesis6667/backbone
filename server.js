@@ -8,6 +8,9 @@ http.createServer( function (request, response) {
    // Parse the request containing file name
    var pathname = url.parse(request.url).pathname;
    
+   if(request.url=='/index.html' || request.url=='/') {
+	    request.url = '/index.html';
+	    });
    // Print the name of the file for which request is made.
    console.log("Request for " + pathname + " received.");
    
@@ -33,4 +36,3 @@ http.createServer( function (request, response) {
 }).listen(process.env.PORT || 5000);
 
 // Console will print the message
-console.log('Server running at http://127.0.0.1:8081/');
