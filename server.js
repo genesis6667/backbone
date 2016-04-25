@@ -30,7 +30,7 @@ http.createServer( function (request, response) {
       // Send the response body 
       response.end();
    });   
-}).listen(8081);
+}).listen(process.env.PORT || 5000);
 
 // Console will print the message
 console.log('Server running at http://127.0.0.1:8081/');
